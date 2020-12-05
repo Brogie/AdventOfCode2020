@@ -59,16 +59,13 @@ namespace day5
             foreach (var seat in seatLocations)
             {
                 if (seat == string.Empty) { continue; }
-                StringBuilder rowString = new StringBuilder(seat.Substring(0, 7));
-                StringBuilder columnString = new StringBuilder(seat.Substring(7, 3));
+                StringBuilder rowString = new StringBuilder(seat);
                 rowString.Replace("F", "0");
                 rowString.Replace("B", "1");
-                columnString.Replace("L", "0");
-                columnString.Replace("R", "1");
+                rowString.Replace("L", "0");
+                rowString.Replace("R", "1");
 
-                int row = Convert.ToInt32(rowString.ToString(), 2);
-                int column = Convert.ToInt32(columnString.ToString(), 2);
-                int id = (row * 8) + column;
+                int id = Convert.ToInt32(rowString.ToString(), 2);
 
                 ids.Add(id);
                 if (id > highId) { highId = id; }
