@@ -13,6 +13,7 @@ namespace day5
             string[] seatLocations = sr.ReadToEnd().Split("\n");
             Console.WriteLine(Part1(seatLocations));
             Console.WriteLine(Part2(seatLocations));
+            Attempt2(seatLocations);
         }
 
         static int Part1(string[] seatLocations)
@@ -49,6 +50,32 @@ namespace day5
             }
 
             return FindMissingId(justIDs);
+        }
+
+        static void Attempt2(string[] seatLocations)
+        {
+            int highId = 0;
+            List<int> ids = new List<int>();
+            foreach (var seat in seatLocations)
+            {
+                if (seat == string.Empty) { continue; }
+                StringBuilder rowString = new StringBuilder(seat.Substring(0, 7));
+                StringBuilder columnString = new StringBuilder(seat.Substring(7, 3));
+                rowString.Replace("F", "0");
+                rowString.Replace("B", "1");
+                columnString.Replace("L", "0");
+                columnString.Replace("R", "1");
+
+                int row = Convert.ToInt32(rowString.ToString(), 2);
+                int column = Convert.ToInt32(columnString.ToString(), 2);
+                int id = (row * 8) + column;
+
+                ids.Add(id);
+                if (id > highId) { highId = id; }
+            }
+
+            Console.WriteLine("Part 1: " + highId);
+            Console.WriteLine("Part 2: " + FindMissingId(ids));
         }
 
         private static int SearchXorY(string seat, int lowerBound, int upperBound, char lowerCommand, char upperCommand)
