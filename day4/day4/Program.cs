@@ -109,8 +109,6 @@ namespace day4
             Regex passId = new Regex("[0-9]{9}");
             if (passportItems["pid"].Length != 9 || !passId.IsMatch(passportItems["pid"])) { return false; }
 
-            Console.WriteLine(passportItems["pid"]);
-
             return true;
         }
 

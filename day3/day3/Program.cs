@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Numerics;
+using System.Text;
+using System.Threading;
+
 namespace day3
 {
     class Program
@@ -348,11 +351,13 @@ namespace day3
 
         static void Main(string[] args)
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
             Console.WriteLine(Part1(1,3));
             Console.WriteLine(Part2());
         }
 
-        private static int Part1(int down, int right)
+        private static int Part1(int down, int right, bool visualise = true)
         {
             int treeCount = 0;
             int x = 0;
@@ -363,6 +368,10 @@ namespace day3
             while(y <= maxY)
             {
                 if (map[y][x] == '#') {  treeCount++; }
+                if(visualise)
+                {
+                    draw(map[y], x, treeCount);
+                }
                 y+=down;
                 x+=right;
                 if (x > maxX) { x = (x % maxX) - 1; }
@@ -382,6 +391,31 @@ namespace day3
             output *= Part1(2, 1);
 
             return output;
+        }
+
+        private static void draw(string row, int pos , int count)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            StringBuilder sb = new StringBuilder(row);
+            sb.Replace('.', ' ');
+            sb.Replace('#', '¥');
+            sb.Append(" " + count);
+
+            Console.Write(sb.ToString());
+            if(sb[pos] == '¥')
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+            } else
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
+
+            }
+            Console.CursorLeft = pos;
+            Console.Write('☻');
+            Console.CursorTop++;
+            Console.CursorLeft = 0;
+            
+            Thread.Sleep(60);
         }
     }
 }
