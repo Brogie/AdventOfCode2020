@@ -27,7 +27,7 @@ namespace day5
             Console.WriteLine("[Attempt 2]");
             watch = new Stopwatch();
             watch.Start();
-            Attempt2(seatLocations, out part1, out part2);
+            //Attempt2(seatLocations, out part1, out part2);
             watch.Stop();
             Console.WriteLine("Part 1: " + part1);
             Console.WriteLine("Part 2: " + part2);
@@ -45,6 +45,21 @@ namespace day5
             Console.WriteLine("Part 1: " + part1);
             Console.WriteLine("Part 2: " + part2);
             Console.WriteLine( ((double)watch.ElapsedTicks / Stopwatch.Frequency * 1000) + " ms\n");
+
+            part1 = 0;
+            part2 = 0;
+
+            Console.WriteLine("[Attempt 3: avg over 1000]");
+            watch = new Stopwatch();
+            watch.Start();
+            for (int i = 0; i < 1000; i++)
+            {
+                Attempt3(seatLocations, out part1, out part2);
+            }
+            watch.Stop();
+            Console.WriteLine("Part 1: " + part1);
+            Console.WriteLine("Part 2: " + part2);
+            Console.WriteLine(((double)watch.ElapsedTicks / Stopwatch.Frequency) + " ms\n");
 
             //for (int i = 0; i < 10000; i++)
             //{
