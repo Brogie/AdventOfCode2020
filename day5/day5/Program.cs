@@ -109,46 +109,46 @@ namespace day5
             }
 
             // Cheating at this point by looking at other solutions trying to make it fast
-            unsafe static void Attempt3(string[] seatLocations, out int part1, out int part2)
+    unsafe static void Attempt3(string[] seatLocations, out int part1, out int part2)
+    {
+        ushort checksum = 0;
+        ushort minId = ushort.MaxValue;
+        ushort maxId = ushort.MinValue;
+        foreach (var seat in seatLocations)
+        {
+            ushort id = 0;
+
+            fixed (char* pString = seat)
             {
-                ushort checksum = 0;
-                ushort minId = ushort.MaxValue;
-                ushort maxId = ushort.MinValue;
-                foreach (var seat in seatLocations)
+                char* pChar = pString;
+                for (int i = 0; i < 10; i++)
                 {
-                    ushort id = 0;
-
-                    fixed (char* pString = seat)
+                    if (*pChar == 'B' | *pChar == 'R')
                     {
-                        char* pChar = pString;
-                        for (int i = 0; i < 10; i++)
-                        {
-                            if (*pChar == 'B' | *pChar == 'R')
-                            {
-                                id |= (ushort)(1 << 9 - i);
-                            }
-                            pChar++;
-                        }
+                        id |= (ushort)(1 << 9 - i);
                     }
-
-                    checksum ^= id;
-                    if (id > maxId) { maxId = id; }
-                    if (id < minId) { minId = id; }
+                    pChar++;
                 }
-
-                for (ushort i = ushort.MinValue; i < minId; i++)
-                {
-                    checksum ^= i;
-                }
-
-                for (ushort i = (ushort)(maxId + 1); i < 1024; i++)
-                {
-                    checksum ^= i;
-                }
-
-                part1 = maxId;
-                part2 = checksum;
             }
+
+            checksum ^= id;
+            if (id > maxId) { maxId = id; }
+            if (id < minId) { minId = id; }
+        }
+
+        for (ushort i = ushort.MinValue; i < minId; i++)
+        {
+            checksum ^= i;
+        }
+
+        for (ushort i = (ushort)(maxId + 1); i < 1024; i++)
+        {
+            checksum ^= i;
+        }
+
+        part1 = maxId;
+        part2 = checksum;
+    }
 
             static int SearchXorY(string seat, int lowerBound, int upperBound, char lowerCommand, char upperCommand)
             {
