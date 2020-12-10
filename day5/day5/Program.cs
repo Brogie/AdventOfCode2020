@@ -24,14 +24,14 @@ namespace day5
             Console.WriteLine("Part 2: " + part2);
             Console.WriteLine(((double)watch.ElapsedTicks / Stopwatch.Frequency * 1000) + " ms\n");
 
-            Console.WriteLine("[Attempt 2]");
-            watch = new Stopwatch();
-            watch.Start();
-            //Attempt2(seatLocations, out part1, out part2);
-            watch.Stop();
-            Console.WriteLine("Part 1: " + part1);
-            Console.WriteLine("Part 2: " + part2);
-            Console.WriteLine(((double)watch.ElapsedTicks / Stopwatch.Frequency * 1000) + " ms\n");
+            //Console.WriteLine("[Attempt 2]");
+            //watch = new Stopwatch();
+            //watch.Start();
+            ////Attempt2(seatLocations, out part1, out part2);
+            //watch.Stop();
+            //Console.WriteLine("Part 1: " + part1);
+            //Console.WriteLine("Part 2: " + part2);
+            //Console.WriteLine(((double)watch.ElapsedTicks / Stopwatch.Frequency * 1000) + " ms\n");
 
             //reset to be sure
             part1 = 0;
@@ -59,7 +59,7 @@ namespace day5
             watch.Stop();
             Console.WriteLine("Part 1: " + part1);
             Console.WriteLine("Part 2: " + part2);
-            Console.WriteLine(((double)watch.ElapsedTicks / Stopwatch.Frequency) + " ms\n");
+            Console.WriteLine(((double)watch.ElapsedTicks / Stopwatch.Frequency * 1000) / 1000 + " ms\n");
 
             //for (int i = 0; i < 10000; i++)
             //{
